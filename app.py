@@ -1,22 +1,28 @@
+Copy code
 import openai
 import streamlit as st
 import os
 
 def evaluar_ensayo(ensayo, tipo):
-    # Utiliza GPT-3 para evaluar el ensayo
-    model_engine = "text-davinci-003"
-    if tipo == "argumentativo":
-        prompt = (f"Evaluar la calidad del ensayo argumentativo:\n{ensayo}\n\n"
-                  "Criterios de evaluación: estructura, coherencia y argumentación. "
-                  "Señalar los aspectos positivos y negativos y dar una calificación.")
-    else:
-        prompt = (f"Evaluar la calidad del ensayo expositivo:\n{ensayo}\n\n"
-                  "Criterios de evaluación: claridad, precisión y coherencia. "
-                  "Señalar los aspectos positivos y negativos y dar una calificación.")
+    # Cuenta la cantidad de párrafos en el ensayo
+    num_parrafos = ensayo.count("\n")
 
-    completions = openai.Completion.create(engine=model_engine, prompt=prompt, max_tokens=1024, n=1, stop=None,
-                                           temperature=0.5)
-    respuesta = completions.choices[0].text
+    # Si el ensayo tiene al menos cinco párrafos, continúa con la evaluación
+    if num_parrafos >= 5:
+        # Utiliza GPT-3 para evaluar el ensayo
+        model_engine = "text-davinci-003"
+        if tipo == "argumentativo":
+            prompt = (f"Evaluar la calidad del ensayo argumentativo:\n{ensayo}\n\n"
+                      "Criterios de evaluación: estructura, coherencia y argumentación. "
+                      "Señalar los aspectos positivos y negativos y dar una calificación.")
+        else:
+            prompt = (f"Evaluar la calidad del ensayo expositivo:\n{ensayo}\n\n"
+                      "Criterios de evaluación: claridad, precisión y coherencia. "
+                      "Señalar los aspectos positivos y negativos y dar una calificación.")
+
+        completions = openai.Completion.create(engine=model_engine, prompt=prompt, max_tokens=1024, n=1, stop=None,
+                                               temperature=0.5)
+        respuesta = completions.choices[0].text
 
     # Devuelve la respuesta de GPT-3
     return respuesta
