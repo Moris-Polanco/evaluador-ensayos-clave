@@ -25,7 +25,7 @@ def main():
     st.title("Evaluador de ensayos con GPT-3")
 
     # Agrega un campo de texto para ingresar la API key de OpenAI
-    openai_api_key = st.text_input("Ingresa tu API key de OpenAI")
+    openai_api_key = st.sidebar.text_input("Ingresa tu API key de OpenAI")
 
     # Autenticación de OpenAI (utiliza la API key ingresada por el usuario)
     openai.api_key = openai_api_key
