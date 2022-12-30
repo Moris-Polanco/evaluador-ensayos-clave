@@ -24,11 +24,11 @@ def evaluar_ensayo(ensayo, tipo):
 def main():
     st.title("Evaluador de ensayos con GPT-3")
 
+    # Agrega un título en la columna izquierda
+    st.sidebar.title("Evaluador de ensayos")
+
     # Agrega un campo de texto para ingresar la API key de OpenAI
     openai_api_key = st.sidebar.text_input("Ingresa tu API key de OpenAI")
-
-    # Agrega información debajo de la caja de texto
-    st.sidebar.markdown("Por Moris Polanco")
 
     # Autenticación de OpenAI (utiliza la API key ingresada por el usuario)
     openai.api_key = openai_api_key
